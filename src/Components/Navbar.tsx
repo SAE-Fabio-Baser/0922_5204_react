@@ -26,7 +26,6 @@ function NavbarButton(props: RouteInfo) {
 
 function Navbar(props: { routeInfos: RouteInfo[] }) {
     const { routeInfos } = props
-    const location = useLocation()
 
     const leftRoutes = routeInfos.filter(rI => rI.navMenu === "left")
     const rightRoutes = routeInfos.filter(rI => rI.navMenu === "right")
