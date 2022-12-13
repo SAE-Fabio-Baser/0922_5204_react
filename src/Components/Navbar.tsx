@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
 import { Menu } from "semantic-ui-react"
-import { RouteInfo } from "../App"
+import { RouteInfo } from "../../routes"
+import { AppContext } from "../App"
 
 function NavbarButton(props: RouteInfo) {
+    const { isLoggedIn } = useContext(AppContext)
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -13,7 +15,9 @@ function NavbarButton(props: RouteInfo) {
     if (isActive) {
         document.title = "SAE APP - " + props.navText
     }
-
+    if (isLoggedIn && (props.path === "/login" || props.path === "/register")) {
+        return null
+    }
     function handleClick() {
         navigate(props.path)
     }
@@ -28,7 +32,7 @@ function Navbar(props: { routeInfos: RouteInfo[] }) {
     const { routeInfos } = props
 
     const leftRoutes = routeInfos.filter(rI => rI.navMenu === "left")
-    const rightRoutes = routeInfos.filter(rI => rI.navMenu === "right")
+    let rightRoutes = routeInfos.filter(rI => rI.navMenu === "right")
 
     return (
         <Menu pointing secondary>
