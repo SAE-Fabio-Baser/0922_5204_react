@@ -1,51 +1,60 @@
+import { User } from '../Pages/Users'
+
 interface BackendResponse {
     success: boolean
     data?: Record<string, any>
     error?: string
 }
 
-function login(email: string, password: string) {
-    console.log("Login: ", { email, password });
+async function login(email: string, password: string): Promise<BackendResponse> {
+    console.log('Login: ', { email, password })
 
-    const body = {
-        email, password
-    }
+    const body = { email, password }
 
-    function handleResponse(response: BackendResponse) {
+    const rawResponse = await fetch('http://localhost:3000/auth/login', {
+        method: 'post',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+    })
 
-        if (response.success && response.data?.token) {
-
-            sessionStorage.setItem("sae_token", response.data.token)
-
-        }
-
-    }
-
-    fetch("http://localhost:3000/auth/login", { method: "post", body: JSON.stringify(body), headers: { 'Content-Type': "application/json" } })
-        .then(res => res.json())
-        .then(handleResponse)
-        .catch(console.error)
+    return await rawResponse.json()
 }
 
 async function register(email: string, password: string): Promise<BackendResponse> {
-    console.log("Register: ", { email, password });
+    console.log('Register: ', { email, password })
 
     const body = {
-        email, password
+        email,
+        password,
     }
 
-    const rawResponse = await fetch("http://localhost:3000/auth/register", {
-        method: "post", body: JSON.stringify(body), headers: {
-            'Content-Type': "application/json"
-        }
+    const rawResponse = await fetch('http://localhost:3000/auth/register', {
+        method: 'post',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        },
     })
 
-    const responseData : BackendResponse = await rawResponse.json()
+    return await rawResponse.json()
+}
 
-    return responseData
+async function getAllUsers(token: string): Promise<User[]> {
+    const rawResponse = await fetch('http://localhost:3000/api/users', {
+        method: 'get',
+        headers: {
+            Authorization: 'Bearer ' + token,
+        },
+    })
 
+    return await rawResponse.json()
 }
 
 export const auth = {
-    login, register
+    login,
+    register,
+}
+
+export const users = {
+    getAllUsers,
 }
