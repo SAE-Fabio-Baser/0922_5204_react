@@ -12,7 +12,7 @@ export interface User {
 
 function Users() {
     const [userInfos, setUserInfos] = useState<User[]>([])
-    const { token } = useContext(AppContext)
+    const { token, qr } = useContext(AppContext)
 
     useEffect(() => {
         users.getAllUsers(token).then(setUserInfos)
@@ -20,6 +20,7 @@ function Users() {
 
     return (
         <div>
+            <img src={qr} />
             <List celled>
                 {userInfos.map(userInfo => (
                     <List.Item key={userInfo._id}>

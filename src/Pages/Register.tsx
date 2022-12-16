@@ -11,7 +11,7 @@ function Register() {
     const [passwordRep, setPasswordRep] = useState('')
     const navigate = useNavigate()
 
-    const { setToken } = useContext(AppContext)
+    const { setToken, setUser, setQr } = useContext(AppContext)
 
     function handleChange(_event: ChangeEvent, p: InputProps) {
         const { name, value } = p
@@ -25,7 +25,10 @@ function Register() {
 
         auth.register(email, password).then(({ data }) => {
             if (data && data.token) {
+                console.log(data)
                 setToken(data.token)
+                setUser(data.user)
+                setQr(data['2faQr'])
                 sessionStorage.setItem('sae_token', data.token)
                 navigate('/')
             }
