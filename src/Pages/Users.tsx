@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { Label, List } from 'semantic-ui-react'
 import { AppContext } from '../App'
-import { users } from '../lib/api'
+import { users } from '../api'
 
 export interface User {
     _id: string

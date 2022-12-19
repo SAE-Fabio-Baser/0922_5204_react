@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, InputProps } from 'semantic-ui-react'
 import { AppContext } from '../App'
 
-import { auth } from '../lib/api'
+import { auth } from '../api'
 
 function Register() {
     const [email, setEmail] = useState('')

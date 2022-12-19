@@ -1,4 +1,4 @@
-import { User } from '../Pages/Users'
+import { User } from '../../Pages/Users'
 
 interface BackendResponse {
     success: boolean

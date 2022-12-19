@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 
-import { Home, About, Register, Login, Users } from './src/Pages'
+import { Home, About, Register, Login, Users, Post, Posts, PostEditor } from './src/Pages'
 
 export interface RouteInfo {
     page: ReactElement
@@ -41,6 +41,24 @@ const routeInfos: RouteInfo[] = [
         navMenu: 'left',
         navText: 'Users',
         requiredRole: 2,
+    },
+    {
+        path: '/blog',
+        page: <Posts />,
+        navMenu: 'left',
+        navText: 'Blog',
+    },
+    {
+        path: '/blog/:slug',
+        page: <Post />,
+        navMenu: 'none',
+        navText: 'Post',
+    },
+    {
+        path: '/editor',
+        page: <PostEditor />,
+        navMenu: 'left',
+        navText: 'Editor',
     },
     {
         path: '*',

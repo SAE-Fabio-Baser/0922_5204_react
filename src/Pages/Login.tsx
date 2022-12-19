@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, InputProps } from 'semantic-ui-react'
-import { auth } from '../lib/api'
+import { auth } from '../api'
 import { AppContext } from '../App'
 
 function Login() {

@@ -1,22 +1,26 @@
 {
-  "name": "0922_5204_react",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "vite"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.5",
-    "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.4",
-    "vite": "^3.2.5"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.26",
-    "@typescript-eslint/eslint-plugin": "^5.45.0",
-    "@typescript-eslint/parser": "^5.45.0",
-    "eslint": "^8.29.0",
-    "eslint-plugin-react": "^7.31.11"
-  }
+    "name": "0922_5204_react",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "vite"
+    },
+    "dependencies": {
+        "@types/draft-js": "^0.11.10",
+        "@types/react-draft-wysiwyg": "^1.13.4",
+        "draft-js": "^0.11.7",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-draft-wysiwyg": "^1.15.0",
+        "react-router-dom": "^6.4.5",
+        "semantic-ui-css": "^2.5.0",
+        "semantic-ui-react": "^2.1.4",
+        "vite": "^3.2.5"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.26",
+        "@typescript-eslint/eslint-plugin": "^5.45.0",
+        "@typescript-eslint/parser": "^5.45.0",
+        "eslint": "^8.29.0",
+        "eslint-plugin-react": "^7.31.11"
+    }
 }
