@@ -1,5 +1,8 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import create from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
 
 import Navbar from './Components/Navbar'
 import routeInfos from '../routes'
@@ -12,38 +15,42 @@ interface User {
     _id: string
 }
 
-interface TAppContext {
+interface AppStore {
     token: string
-    setToken: Dispatch<SetStateAction<string>>
+    setToken: (token: string) => void
     user: User | null
-    setUser: Dispatch<SetStateAction<User | null>>
+    setUser: (user: User | null) => void
     qr: string
-    setQr: Dispatch<SetStateAction<string>>
+    setQr: (qr: string) => void
 }
-
-// @ts-ignore
-export const AppContext = createContext<TAppContext>()
+export const useAppStore = create<AppStore>()(
+    persist(
+        devtools(set => ({
+            token: '',
+            setToken: token => set({ token }),
+            user: null,
+            setUser: user => set({ user }),
+            qr: '',
+            setQr: qr => set({ qr }),
+        })),
+        { name: 'AppStore' }
+    )
+)
 
 function App() {
-    const [token, setToken] = useState(sessionStorage.getItem('sae_token') || '')
-    const [user, setUser] = useState<User | null>(null)
-    const [qr, setQr] = useState('')
-
     return (
-        <AppContext.Provider value={{ token, setToken, user, setUser, qr, setQr }}>
-            <BrowserRouter>
-                <Navbar routeInfos={routeInfos} />
-                <Routes>
-                    {routeInfos.map(routeInfo => (
-                        <Route
-                            key={routeInfo.path}
-                            path={routeInfo.path}
-                            element={routeInfo.page}
-                        />
-                    ))}
-                </Routes>
-            </BrowserRouter>
-        </AppContext.Provider>
+        <BrowserRouter>
+            <Navbar routeInfos={routeInfos} />
+            <Routes>
+                {routeInfos.map(routeInfo => (
+                    <Route
+                        key={routeInfo.path}
+                        path={routeInfo.path}
+                        element={routeInfo.page}
+                    />
+                ))}
+            </Routes>
+        </BrowserRouter>
     )
 }
 

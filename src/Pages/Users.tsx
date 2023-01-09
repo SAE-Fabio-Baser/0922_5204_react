@@ -1,6 +1,6 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Label, List } from 'semantic-ui-react'
-import { AppContext } from '../App'
+import { useAppStore } from '../App'
 import { users } from '../api'
 
 export interface User {
@@ -12,7 +12,7 @@ export interface User {
 
 function Users() {
     const [userInfos, setUserInfos] = useState<User[]>([])
-    const { token, qr } = useContext(AppContext)
+    const [token, qr] = useAppStore(s => [s.token, s.qr])
 
     useEffect(() => {
         users.getAllUsers(token).then(setUserInfos)

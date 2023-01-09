@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, InputProps } from 'semantic-ui-react'
-import { AppContext } from '../App'
+import { useAppStore } from '../App'
 
 import { auth } from '../api'
 
@@ -11,7 +11,7 @@ function Register() {
     const [passwordRep, setPasswordRep] = useState('')
     const navigate = useNavigate()
 
-    const { setToken, setUser, setQr } = useContext(AppContext)
+    const [setToken, setUser, setQr] = useAppStore(s => [s.setToken, s.setUser, s.setQr])
 
     function handleChange(_event: ChangeEvent, p: InputProps) {
         const { name, value } = p

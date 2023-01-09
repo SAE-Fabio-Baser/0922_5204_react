@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Button, Menu } from 'semantic-ui-react'
 import { RouteInfo } from '../../routes'
-import { AppContext } from '../App'
+import { useAppStore } from '../App'
 
 function NavbarButton(props: RouteInfo) {
-    const { token } = useContext(AppContext)
+    const token = useAppStore(s => s.token)
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -34,7 +34,7 @@ function NavbarButton(props: RouteInfo) {
 
 function Navbar(props: { routeInfos: RouteInfo[] }) {
     const { routeInfos } = props
-    const { token, setToken } = useContext(AppContext)
+    const [token, setToken] = useAppStore(s => [s.token, s.setToken])
 
     const leftRoutes = routeInfos.filter(rI => rI.navMenu === 'left')
     let rightRoutes = routeInfos.filter(rI => rI.navMenu === 'right')

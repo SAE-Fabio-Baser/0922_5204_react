@@ -1,14 +1,14 @@
-import React, { ChangeEvent, useContext, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, InputProps } from 'semantic-ui-react'
 import { auth } from '../api'
-import { AppContext } from '../App'
+import { useAppStore } from '../App'
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const { setToken, setUser } = useContext(AppContext)
+    const [setToken, setUser] = useAppStore(s => [s.setToken, s.setUser])
 
     function handleChange(_event: ChangeEvent, p: InputProps) {
         const { name, value } = p
@@ -71,6 +71,3 @@ function Login() {
 }
 
 export default Login
-function useNavitage() {
-    throw new Error('Function not implemented.')
-}

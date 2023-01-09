@@ -14,7 +14,8 @@
         "react-router-dom": "^6.4.5",
         "semantic-ui-css": "^2.5.0",
         "semantic-ui-react": "^2.1.4",
-        "vite": "^3.2.5"
+        "vite": "^3.2.5",
+        "zustand": "^4.2.0"
     },
     "devDependencies": {
         "@types/react": "^18.0.26",
