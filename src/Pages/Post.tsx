@@ -23,7 +23,7 @@ function genElement(block: PostContent) {
     return element
 }
 
-function Post() {
+function PostElement() {
     const [postData, setPostData] = useState<null | Post>(null)
     const { slug = '' } = useParams()
 
@@ -41,4 +41,4 @@ function Post() {
     return <div>{contentElements}</div>
 }
 
-export default Post
+export default PostElement

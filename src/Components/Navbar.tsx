@@ -5,35 +5,37 @@ import { Button, Menu } from 'semantic-ui-react'
 import { RouteInfo } from '../../routes'
 import { useAppStore } from '../App'
 
-function NavbarButton(props: RouteInfo) {
-    const token = useAppStore(s => s.token)
+function NavbarButton(props: { routeInfo: RouteInfo; isLoggedIn: boolean }) {
+    const { routeInfo, isLoggedIn } = props
+
+    const { path, navText } = routeInfo
     const location = useLocation()
     const navigate = useNavigate()
 
-    const isActive = location.pathname === props.path
+    const isActive = location.pathname === path
 
     if (isActive) {
-        document.title = 'SAE APP - ' + props.navText
+        document.title = 'SAE APP - ' + navText
     }
-    if (token && (props.path === '/login' || props.path === '/register')) {
+    if (isLoggedIn && (path === '/login' || path === '/register')) {
         return null
     }
     function handleClick() {
-        navigate(props.path)
+        navigate(path)
     }
     return (
         <Menu.Item
             active={isActive}
             onClick={handleClick}
-            key={props.path}
+            key={path}
         >
-            {props.navText}
+            {navText}
         </Menu.Item>
     )
 }
 
-function Navbar(props: { routeInfos: RouteInfo[] }) {
-    const { routeInfos } = props
+function Navbar(props: { routeInfos: RouteInfo[]; isLoggedIn: boolean }) {
+    const { routeInfos = [], isLoggedIn } = props
     const [token, setToken] = useAppStore(s => [s.token, s.setToken])
 
     const leftRoutes = routeInfos.filter(rI => rI.navMenu === 'left')
@@ -41,7 +43,6 @@ function Navbar(props: { routeInfos: RouteInfo[] }) {
 
     function handleLogout() {
         setToken('')
-        sessionStorage.removeItem('sae_token')
     }
 
     return (
@@ -49,10 +50,20 @@ function Navbar(props: { routeInfos: RouteInfo[] }) {
             pointing
             secondary
         >
-            {leftRoutes.map(NavbarButton)}
+            {leftRoutes.map(rI => (
+                <NavbarButton
+                    routeInfo={rI}
+                    isLoggedIn={isLoggedIn || token}
+                />
+            ))}
             <Menu.Menu position="right">
-                {rightRoutes.map(NavbarButton)}
-                {token && (
+                {rightRoutes.map(routeInfo => (
+                    <NavbarButton
+                        routeInfo={routeInfo}
+                        isLoggedIn={isLoggedIn || token}
+                    />
+                ))}
+                {(isLoggedIn || token) && (
                     <Button
                         basic
                         onClick={handleLogout}
