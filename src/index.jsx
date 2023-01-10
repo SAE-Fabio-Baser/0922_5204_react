@@ -1,10 +1,11 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
+import React from 'react'
+import { createRoot } from 'react-dom/client'
 
-import "semantic-ui-css/semantic.min.css"
+import 'semantic-ui-css/semantic.min.css'
+import './tailwind.css'
 
-import App from "./App";
+import App from './App'
 
-const root = createRoot(document.querySelector("#app"));
+const root = createRoot(document.querySelector('#app'))
 
-root.render(<App />);
+root.render(<App />)

@@ -2,7 +2,6 @@ import React from 'react'
 import { ComponentMeta } from '@storybook/react'
 
 import Navbar from './Navbar'
-import routeInfos from '../../routes'
 import { BrowserRouter } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import { useAppStore } from '../App'
@@ -15,7 +14,10 @@ export default {
 const Template = args => {
     return (
         <BrowserRouter>
-            <Navbar routeInfos={routeInfos} {...args} />
+            <Navbar
+                routeInfos={[]}
+                {...args}
+            />
         </BrowserRouter>
     )
 }
