@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Label, List } from 'semantic-ui-react'
-import { useAppStore } from '../App'
+import { useAppStore } from '../store'
 import { users } from '../api'
 
 export interface User {

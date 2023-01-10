@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Button, Menu } from 'semantic-ui-react'
 import { RouteInfo } from '../../routes'
-import { useAppStore } from '../App'
+import { useAppStore } from '../store'
 
 function NavbarButton(props: { routeInfo: RouteInfo; isLoggedIn: boolean }) {
     const { routeInfo, isLoggedIn } = props
