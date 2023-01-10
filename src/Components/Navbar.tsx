@@ -53,14 +53,14 @@ function Navbar(props: { routeInfos: RouteInfo[]; isLoggedIn: boolean }) {
             {leftRoutes.map(rI => (
                 <NavbarButton
                     routeInfo={rI}
-                    isLoggedIn={isLoggedIn || token}
+                    isLoggedIn={isLoggedIn || !!token}
                 />
             ))}
             <Menu.Menu position="right">
                 {rightRoutes.map(routeInfo => (
                     <NavbarButton
                         routeInfo={routeInfo}
-                        isLoggedIn={isLoggedIn || token}
+                        isLoggedIn={isLoggedIn || !!token}
                     />
                 ))}
                 {(isLoggedIn || token) && (
