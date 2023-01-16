@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "dev": "vite",
+        "test": "vitest",
         "watch:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css --watch",
         "watch:storybook": "storybook dev -p 6006",
         "storybook": "concurrently \"pnpm:watch:*\"",
@@ -33,13 +34,18 @@
         "@storybook/react": "^7.0.0-beta.21",
         "@storybook/react-vite": "^7.0.0-beta.21",
         "@storybook/testing-library": "^0.0.13",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
         "@types/react": "^18.0.26",
         "@typescript-eslint/eslint-plugin": "^5.45.0",
         "@typescript-eslint/parser": "^5.45.0",
+        "@vitejs/plugin-react": "^3.0.1",
         "babel-loader": "^8.3.0",
         "eslint": "^8.29.0",
         "eslint-plugin-react": "^7.31.11",
+        "jsdom": "^21.0.0",
         "prop-types": "^15.8.1",
-        "storybook": "^7.0.0-beta.21"
+        "storybook": "^7.0.0-beta.21",
+        "vitest": "^0.27.1"
     }
 }

@@ -49,6 +49,7 @@ function Navbar(props: { routeInfos: RouteInfo[]; isLoggedIn: boolean }) {
         <Menu
             pointing
             secondary
+            role="menu"
         >
             {leftRoutes.map(rI => (
                 <NavbarButton
@@ -67,6 +68,7 @@ function Navbar(props: { routeInfos: RouteInfo[]; isLoggedIn: boolean }) {
                     <Button
                         basic
                         onClick={handleLogout}
+                        role="button"
                     >
                         Sign Out
                     </Button>
