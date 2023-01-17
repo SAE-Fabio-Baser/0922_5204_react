@@ -1,6 +1,5 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, MouseEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Input, InputProps } from 'semantic-ui-react'
 import { auth } from '../api'
 import { useAppStore } from '../store'
 
@@ -10,13 +9,15 @@ function Login() {
     const navigate = useNavigate()
     const [setToken, setUser] = useAppStore(s => [s.setToken, s.setUser])
 
-    function handleChange(_event: ChangeEvent, p: InputProps) {
-        const { name, value } = p
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target
         if (name === 'email') setEmail(value)
         else if (name === 'password') setPassword(value)
     }
 
-    async function handleSubmit() {
+    async function handleSubmit(event: MouseEvent<HTMLButtonElement>) {
+        event.preventDefault()
+
         const loginResult = await auth.login(email, password)
 
         if (loginResult.success && loginResult.data?.token) {
@@ -29,11 +30,11 @@ function Login() {
 
     function handleKeyPress(event: KeyboardEvent) {
         if (event.key !== 'Enter') return
-        handleSubmit()
+        // handleSubmit()
     }
 
     return (
-        <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg-neutral-100">
+        <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <img
                     className="mx-auto h-12 w-auto"
@@ -66,6 +67,8 @@ function Login() {
                                     name="email"
                                     type="email"
                                     autoComplete="email"
+                                    value={email}
+                                    onChange={handleChange}
                                     required
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                 />
@@ -86,6 +89,8 @@ function Login() {
                                     type="password"
                                     autoComplete="current-password"
                                     required
+                                    value={password}
+                                    onChange={handleChange}
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                 />
                             </div>
@@ -94,6 +99,7 @@ function Login() {
                         <div>
                             <button
                                 type="submit"
+                                onClick={handleSubmit}
                                 className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 Sign in

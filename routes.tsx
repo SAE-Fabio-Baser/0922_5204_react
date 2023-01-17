@@ -26,13 +26,13 @@ const routeInfos: RouteInfo[] = [
     {
         path: '/register',
         page: <Register />,
-        navMenu: 'right',
+        navMenu: 'none',
         navText: 'Register',
     },
     {
         path: '/login',
         page: <Login />,
-        navMenu: 'right',
+        navMenu: 'none',
         navText: 'Login',
     },
     {
